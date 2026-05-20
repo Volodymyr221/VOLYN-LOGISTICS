@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VOLYN Logistics — Вантажні перевезення по Україні та ЄС</title>
+    <meta
+      name="description"
+      content="Швидке перевезення вантажів по Україні та ЄС. Розрахунок вартості у Viber/Telegram за 1 хвилину."
+    />
+    <meta property="og:title" content="VOLYN Logistics — Вантажні перевезення" />
+    <meta
+      property="og:description"
+      content="Агрегатор вантажних перевезень: знаходимо водія, контролюємо маршрут, страхуємо ризики."
+    />
+    <meta property="og:type" content="website" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                50: '#eff6ff',
+                100: '#dbeafe',
+                600: '#2563eb',
+                700: '#1d4ed8',
+                900: '#0f172a'
+              }
+            },
+            boxShadow: {
+              glow: '0 0 0 1px rgba(37,99,235,.2),0 8px 28px rgba(15,23,42,.24)'
+            }
+          }
+        }
+      };
+    </script>
+    <style>
+      .reveal {opacity:0; transform:translateY(16px); transition:all .6s ease}
+      .reveal.is-visible {opacity:1; transform:translateY(0)}
+      .grid-bg {
+        background-image: linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px),
+                          linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px);
+        background-size: 24px 24px;
+      }
+    </style>
+
+    <!-- Google Analytics: замініть G-XXXXXXX на ваш Measurement ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXX');
+    </script>
+
+    <!-- Facebook Pixel: замініть PIXEL_ID на ваш ID -->
+    <script>
+      !(function(f,b,e,v,n,t,s){
+        if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)
+      })(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', 'PIXEL_ID');
+      fbq('track', 'PageView');
+    </script>
+  </head>
+  <body class="bg-slate-50 text-slate-900">
+    <header class="bg-brand-900 text-white grid-bg">
+      <div class="mx-auto max-w-6xl px-4 py-16 sm:py-24">
+        <p class="mb-3 inline-flex rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest">VOLYN Logistics</p>
+        <h1 class="max-w-3xl text-3xl font-bold leading-tight sm:text-5xl">Швидке перевезення вантажів по Україні та ЄС</h1>
+        <p class="mt-4 max-w-2xl text-sm text-slate-200 sm:text-lg">Підбираємо перевізника під ваш вантаж, контролюємо кожен етап та беремо на себе всі операційні питання.</p>
+        <a href="#calculator" class="mt-8 inline-flex rounded-xl bg-brand-600 px-6 py-4 text-base font-semibold shadow-lg transition hover:bg-brand-700">Розрахувати ціну</a>
+      </div>
+    </header>
+
+    <main>
+      <section id="calculator" class="reveal mx-auto -mt-8 max-w-6xl px-4 pb-8">
+        <div class="rounded-2xl bg-white p-5 shadow-glow sm:p-8">
+          <h2 class="text-2xl font-bold text-brand-900">Розумний калькулятор вартості</h2>
+          <p class="mt-2 text-sm text-slate-600">Технологічний підбір маршруту: одразу враховуємо тип вантажу, вагу та напрямок.</p>
+          <form class="mt-6 grid gap-4 sm:grid-cols-2" id="leadForm">
+            <label class="text-sm font-medium">Звідки<input class="mt-1 w-full rounded-xl border border-slate-300 p-3" required name="from" placeholder="Луцьк" /></label>
+            <label class="text-sm font-medium">Куди<input class="mt-1 w-full rounded-xl border border-slate-300 p-3" required name="to" placeholder="Варшава" /></label>
+            <label class="text-sm font-medium">Тип вантажу
+              <select class="mt-1 w-full rounded-xl border border-slate-300 p-3" required name="cargoType">
+                <option value="">Оберіть</option><option>Палети</option><option>Меблі</option><option>Будматеріали</option><option>Негабарит</option>
+              </select>
+            </label>
+            <label class="text-sm font-medium">Вага (кг)<input type="number" min="1" class="mt-1 w-full rounded-xl border border-slate-300 p-3" required name="weight" placeholder="1200" /></label>
+            <label class="sm:col-span-2 text-sm font-medium">Ваш телефон<input class="mt-1 w-full rounded-xl border border-slate-300 p-3" required name="phone" placeholder="+380..." /></label>
+            <button class="sm:col-span-2 rounded-xl bg-brand-900 px-6 py-4 font-semibold text-white transition hover:bg-slate-800" type="submit">Отримати розрахунок на Viber/Telegram</button>
+          </form>
+          <p id="calcResult" class="mt-4 text-sm font-medium text-brand-700"></p>
+        </div>
+      </section>
+
+      <section class="reveal mx-auto max-w-6xl px-4 py-10">
+        <h2 class="text-2xl font-bold">Наші переваги</h2>
+        <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <article class="rounded-xl bg-white p-5 shadow"><h3 class="font-semibold">🔒 Безпека</h3><p class="mt-2 text-sm text-slate-600">Перевірені водії та контроль документів.</p></article>
+          <article class="rounded-xl bg-white p-5 shadow"><h3 class="font-semibold">⚡ Швидкість</h3><p class="mt-2 text-sm text-slate-600">Шукаємо авто під ваш запит у найкоротші терміни.</p></article>
+          <article class="rounded-xl bg-white p-5 shadow"><h3 class="font-semibold">🕐 24/7 підтримка</h3><p class="mt-2 text-sm text-slate-600">На зв’язку на кожному етапі перевезення.</p></article>
+          <article class="rounded-xl bg-white p-5 shadow"><h3 class="font-semibold">🛡 Повне страхування</h3><p class="mt-2 text-sm text-slate-600">Пропонуємо рішення зі страховим покриттям.</p></article>
+        </div>
+      </section>
+
+      <section class="reveal bg-white py-10">
+        <div class="mx-auto max-w-6xl px-4">
+          <h2 class="text-2xl font-bold">Послуги</h2>
+          <div class="mt-6 grid gap-4 md:grid-cols-2">
+            <article class="rounded-xl border p-5"><h3 class="text-lg font-semibold">Дозавантаження</h3><p class="mt-2 text-sm text-slate-600">Економія бюджету за рахунок оптимізації вільного місця.</p></article>
+            <article class="rounded-xl border p-5"><h3 class="text-lg font-semibold">Квартирні переїзди</h3><p class="mt-2 text-sm text-slate-600">Планування, пакування та контроль доставки майна.</p></article>
+            <article class="rounded-xl border p-5"><h3 class="text-lg font-semibold">Міжнародні перевезення</h3><p class="mt-2 text-sm text-slate-600">Україна ↔ ЄС із супроводом документів.</p></article>
+            <article class="rounded-xl border p-5"><h3 class="text-lg font-semibold">Негабаритні вантажі</h3><p class="mt-2 text-sm text-slate-600">Маршрути для складних та нестандартних перевезень.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="reveal mx-auto max-w-6xl px-4 py-10">
+        <h2 class="text-2xl font-bold">Довіра та прозорість</h2>
+        <div class="mt-6 grid gap-4 md:grid-cols-3">
+          <article class="rounded-xl bg-white p-5 shadow"><h3 class="font-semibold">Як ми працюємо</h3><p class="mt-2 text-sm text-slate-600">1) Приймаємо заявку → 2) Підбираємо водія → 3) Погоджуємо ціну → 4) Ведемо доставку до завершення.</p></article>
+          <article class="rounded-xl bg-white p-5 shadow"><h3 class="font-semibold">Наші гарантії</h3><p class="mt-2 text-sm text-slate-600">Фіксація умов перевезення, відповідальність за терміни та підтримка 24/7.</p></article>
+          <article class="rounded-xl bg-white p-5 shadow"><h3 class="font-semibold">Відгуки клієнтів</h3><p class="mt-2 text-sm text-slate-600">“Швидко знайшли авто до Німеччини, усе було чітко та без нервів.”</p></article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-brand-900 pb-24 pt-10 text-white">
+      <div class="mx-auto grid max-w-6xl gap-6 px-4 md:grid-cols-2">
+        <div>
+          <h2 class="text-xl font-bold">Контакти</h2>
+          <p class="mt-3 text-sm text-slate-200">Телефон: +380 XX XXX XX XX</p>
+          <p class="text-sm text-slate-200">Email: hello@volynlogistics.ua</p>
+          <p class="text-sm text-slate-200">м. Луцьк, Україна</p>
+        </div>
+        <div>
+          <h2 class="text-xl font-bold">Ми в месенджерах</h2>
+          <div class="mt-3 flex flex-wrap gap-3 text-sm">
+            <a class="rounded-lg bg-white/10 px-3 py-2" href="#">Viber</a>
+            <a class="rounded-lg bg-white/10 px-3 py-2" href="#">Telegram</a>
+            <a class="rounded-lg bg-white/10 px-3 py-2" href="#">WhatsApp</a>
+          </div>
+          <iframe class="mt-4 h-40 w-full rounded-xl border-0" loading="lazy" allowfullscreen src="https://www.google.com/maps?q=lutsk&output=embed"></iframe>
+        </div>
+      </div>
+    </footer>
+
+    <a href="#" class="fixed bottom-4 left-1/2 z-50 w-[calc(100%-2rem)] max-w-md -translate-x-1/2 rounded-full bg-brand-600 px-5 py-3 text-center text-sm font-bold text-white shadow-lg hover:bg-brand-700">💬 Швидкий зв'язок у Viber / Telegram</a>
+
+    <script>
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add('is-visible');
+        });
+      }, { threshold: 0.2 });
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+      const form = document.getElementById('leadForm');
+      const result = document.getElementById('calcResult');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(form).entries());
+        const base = 16;
+        const weight = Number(data.weight || 0);
+        const estimate = Math.max(1800, Math.round(base * weight * 0.15));
+        result.textContent = `Орієнтовна ціна: від ${estimate} грн. Менеджер скоро напише вам у месенджер.`;
+        if (window.fbq) fbq('track', 'Lead');
+        if (window.gtag) gtag('event', 'generate_lead', { method: 'landing_form' });
+      });
+    </script>
+  </body>
+</html>
